@@ -24,13 +24,13 @@ const prefix = '.'
 const ownerNumber = ['94788240417']
 
 //===================SESSION-AUTH============================
-if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
+if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
 if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
 const sessdata = config.SESSION_ID
 const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
 filer.download((err, data) => {
 if(err) throw err
-fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
+fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
 console.log("Avishka_X-MD Session downloaded ✅")
 })})}
 
@@ -42,7 +42,7 @@ const port = process.env.PORT || 8000;
 
 async function connectToWA() {
 console.log("Connecting Avishka_X-MD 🧬...");
-const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
+const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/sessions/')
 var { version } = await fetchLatestBaileysVersion()
 
 const conn = makeWASocket({
